@@ -21,7 +21,7 @@ const CalculateInput = ({ value, label, name, setValue, result, setResult } : Pr
              onInput={ e => {
              setValue( Number(( e.target as HTMLInputElement).value ))
              result === 0 && setResult( Number(( e.target as HTMLInputElement ).value ))
-         }}/>
+         }} />
         </div>
     )
 }

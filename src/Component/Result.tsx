@@ -4,10 +4,11 @@ type Props = {
     result: number,
     totalTip: number,
     setResult: ( result: number ) => void,
-    setTotalTip: ( totalTip: number ) => void
+    setTotalTip: ( totalTip: number ) => void,
+    perPerson: number
 }
 
-const Result = ({ result, totalTip, setResult, setTotalTip } : Props ) => {
+const Result = ({ result, totalTip, setResult, setTotalTip, perPerson } : Props ) => {
     const resetAll = () => {
         setResult( 0 );
         setTotalTip( 0 );
@@ -18,6 +19,7 @@ const Result = ({ result, totalTip, setResult, setTotalTip } : Props ) => {
             <div>
                 <ResultInput content="Tip Amount" group="person" amount={ totalTip } />
                 <ResultInput content="Total" group="person" amount={ result } />
+                <ResultInput content="Per Person" group="person" amount={ perPerson } />
             </div>
           <button className="bg-cyan-700 text-cyan-900 w-full p-2 rounded-md" onClick={resetAll}>RESET</button>
         </div>
