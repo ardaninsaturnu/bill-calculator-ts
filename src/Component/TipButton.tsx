@@ -8,11 +8,18 @@ type Props = {
 const TipButton = ({ tip, setTip } : Props ) => {
     return(
     <>
-      <button
-        onClick={() => setTip( tip ?? 0 ) }
-        className={`inline py-5 ${ typeof tip === "number" ? 'bg-teal-900 text-white' : 'bg-cyan-100 text-zinc-600'} w-[120px] text-center`}>
-        { tip }{ typeof tip === "number" ? '%' : '' }
-      </button>
+        {
+        typeof tip !== 'number' ? (
+            <input type="number" onChange={ e => setTip(Number(e.target.value)) } className='inline py-5 bg-cyan-100 text-zinc-600 p-4 w-[120px]' placeholder={tip}/>
+            ) : (
+            <button
+                onClick={() => setTip( tip ?? 0 ) }
+                className={`inline py-5 bg-teal-900 text-white w-[120px] text-center`}>
+                { tip }%
+            </button>
+            )
+        }
+
     </>
     )
 }
