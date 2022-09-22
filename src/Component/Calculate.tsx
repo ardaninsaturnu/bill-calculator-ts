@@ -28,7 +28,7 @@ const Calculate = ( { setResult, setTotalTip, result, setPerPerson } : Props ) =
         calculateBill( totalTip, bill );
         calculatePerPerson( result, peopleCount );
 
-    },[ tip, bill, peopleCount, totalTip ]);
+    },[ tip, bill, peopleCount, totalTip, result ]);
 
     const calculateTip = ( tip: number, peopleCount: number, bill: number ) => {
 
