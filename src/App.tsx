@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Result from './Component/Result';
 import Calculate from "./Component/Calculate";
 
@@ -7,11 +7,12 @@ function App() {
     const [ totalTip, setTotalTip ] = useState<number>(0 );
     const [ perPerson, setPerPerson ] = useState<number>(0 );
 
-    const resetAll = async () => {
-        await setResult( 0 );
-        await setTotalTip( 0 );
-        await setPerPerson( 0 );
+    const resetAll = ()  => {
+        setResult( 0 );
+        setTotalTip( 0 );
+        setPerPerson( 0 );
     }
+
 
   return (
       <div className="bg-cyan-100 h-screen flex flex-col justify-center items-center">
