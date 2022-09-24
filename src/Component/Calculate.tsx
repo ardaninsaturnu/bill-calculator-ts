@@ -6,16 +6,19 @@ type Props = {
     setResult: ( item: number ) => void,
     setTotalTip: ( item: number ) => void,
     setPerPerson: ( item: number ) => void,
-    result: number
+    setBill: ( item: number ) => void,
+    setTip: ( item: number ) => void,
+    setPeopleCount: ( item: number ) => void,
+    result: number,
+    bill: number,
+    tip: number,
+    peopleCount: number
 }
 
 const values = [5,10,15,25,50, 'Custom'];
 
-const Calculate = ( { setResult, setTotalTip, result, setPerPerson } : Props ) => {
+const Calculate = ( { setResult, result, setTotalTip, setPerPerson, setBill, bill, setTip, tip, setPeopleCount, peopleCount } : Props ) => {
     const [ totalTip, setTipTotal ] = useState(0 );
-    const [ bill, setBill ] = useState(0 );
-    const [ tip, setTip ] = useState(0 );
-    const [ peopleCount, setPeopleCount ] = useState(0 );
 
     useEffect(() => {
         if( !bill ) {
