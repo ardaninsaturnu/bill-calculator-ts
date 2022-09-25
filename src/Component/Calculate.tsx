@@ -1,77 +1,66 @@
 import CalculateInput from "./CalculateInput";
 import TipButton from "./TipButton";
-import {useEffect, useState} from "react";
-
-type Props = {
-    setResult: ( item: number ) => void,
-    setTotalTip: ( item: number ) => void,
-    setPerPerson: ( item: number ) => void,
-    setBill: ( item: number ) => void,
-    setTip: ( item: number ) => void,
-    setPeopleCount: ( item: number ) => void,
-    result: number,
-    bill: number,
-    tip: number,
-    peopleCount: number
-}
+import {useContext, useEffect, useState} from "react";
+import {TipContext} from "../context";
 
 const values = [5,10,15,25,50, 'Custom'];
 
-const Calculate = ( { setResult, result, setTotalTip, setPerPerson, setBill, bill, setTip, tip, setPeopleCount, peopleCount } : Props ) => {
+const Calculate = () => {
     const [ totalTip, setTipTotal ] = useState(0 );
+    const tipContext = useContext( TipContext );
 
     useEffect(() => {
-        if( !bill ) {
-            setTotalTip( 0 );
-            setResult( 0 );
-            setPerPerson( 0 );
+        if( !tipContext.bill ) {
+            tipContext.setTotalTip( 0 );
+            tipContext.setResult( 0 );
+            tipContext.setPerPerson( 0 );
             return
         }
-        calculateTip( tip, peopleCount, bill );
-        calculateBill( totalTip, bill );
-        calculatePerPerson( result, peopleCount );
+        calculateTip( tipContext.tip, tipContext.peopleCount, tipContext.bill );
+        calculateBill( tipContext.totalTip, tipContext.bill );
+        calculatePerPerson( tipContext.result, tipContext.peopleCount );
 
-    },[ tip, bill, peopleCount, totalTip, result ]);
+    },[ tipContext.tip, tipContext.bill, tipContext.peopleCount, tipContext.totalTip, tipContext.result ]);
 
     const calculateTip = ( tip: number, peopleCount: number, bill: number ) => {
 
         if( bill && !peopleCount ) {
             let tipRate = ( bill * tip ) / 100
-            setTotalTip( tipRate )
+            tipContext.setTotalTip( tipRate )
 
         } else if( bill && peopleCount ) {
             let tipRate = ( bill * tip ) / 100
             setTipTotal( tipRate * peopleCount )
-            setTotalTip( totalTip )
+            tipContext.setTotalTip( totalTip )
         }
     }
 
     const calculateBill = ( totalTip: number, bill: number ) => {
         if( bill ) {
-        setResult( totalTip + ( bill  * peopleCount ));
+        tipContext.setResult( totalTip + ( bill  * tipContext.peopleCount ));
         } else {
-            setResult( 0 );
+            tipContext.setResult( 0 );
         }
     }
 
     const calculatePerPerson = ( result: number, peopleCount: number ) => {
         if( result && peopleCount ) {
-            setPerPerson( result / peopleCount );
+            tipContext.setPerPerson( result / peopleCount );
         }
     }
 
     return(
         <div className="flex flex-col bg-white w-1/2 p-5">
-            <CalculateInput value={ bill } setValue={ setBill } name="bill" label="bill" setResult={setResult} result={result} />
+            <CalculateInput value={ tipContext.bill } setValue={ tipContext.setBill } name="bill" label="bill"/>
             <div>
                 <p className="mb-5">Select Tip %</p>
                 <div className="flex flex-wrap gap-2 mb-5">
                     {
-                        values.map( ( tip, index ) => <TipButton tip={ tip } setTip = { setTip } key ={ index } /> )
+                        values.map( ( tip, index ) => <TipButton tip={ tip } key ={ index } /> )
                     }
                 </div>
             </div>
-            <CalculateInput value={ peopleCount } setValue={ setPeopleCount } name="people" label="Number of people" tip={tip} result={result} setResult={setResult}/>
+            <CalculateInput value={ tipContext.peopleCount } setValue={ tipContext.setPeopleCount } name="people" label="Number of people" />
         </div>
     )
 }

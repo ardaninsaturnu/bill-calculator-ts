@@ -1,14 +1,15 @@
+import {useContext} from "react";
+import {TipContext} from "../context";
+
 type Props = {
     value?: number,
-    label: string,
     setValue: ( value: number ) => void,
-    result?: number,
+    label: string,
     name: string,
-    tip?: number,
-    setResult: ( result : number ) => void
 }
 
-const CalculateInput = ({ value, label, name, setValue, result, setResult } : Props ) => {
+const CalculateInput = ({ value, setValue, label, name } : Props ) => {
+    const tipContext = useContext(TipContext);
 
     return(
         <div className="flex flex-col mb-5">
@@ -20,7 +21,7 @@ const CalculateInput = ({ value, label, name, setValue, result, setResult } : Pr
              id={ name }
              onInput={ e => {
              setValue( Number(( e.target as HTMLInputElement).value ))
-             result === 0 && setResult( Number(( e.target as HTMLInputElement ).value ))
+             tipContext.result === 0 && tipContext.setResult( Number(( e.target as HTMLInputElement ).value ))
          }} />
         </div>
     )
