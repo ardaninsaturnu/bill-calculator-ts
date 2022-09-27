@@ -17,11 +17,11 @@ const Calculate = () => {
             tipContext.setPerPerson( 0 );
             return
         }
-        calculateTip( tip, tipContext.peopleCount, tipContext.bill );
+        calculateTip( tipContext.tip, tipContext.peopleCount, tipContext.bill );
         calculateBill( tipContext.totalTip, tipContext.bill );
         calculatePerPerson( tipContext.result, tipContext.peopleCount );
 
-    },[ tip, tipContext.bill, tipContext.peopleCount, tipContext.totalTip, tipContext.result ]);
+    },[ tipContext.tip, tipContext.bill, tipContext.peopleCount, tipContext.totalTip, tipContext.result ]);
 
     const calculateTip = ( tip: number, peopleCount: number, bill: number ) => {
 
@@ -32,7 +32,7 @@ const Calculate = () => {
         } else if( bill && peopleCount ) {
             let tipRate = ( bill * tip ) / 100
             setTipTotal( tipRate * peopleCount )
-            tipContext.setTotalTip( totalTip )
+            tipContext.setTotalTip( tipRate * peopleCount )
         }
     }
 
@@ -57,7 +57,7 @@ const Calculate = () => {
                 <p className="mb-5">Select Tip %</p>
                 <div className="flex flex-wrap gap-2 mb-5">
                     {
-                        values.map( ( tipAmount, index ) => <TipButton tip={ tipAmount } setTip={setTip} key ={ index } /> )
+                        values.map( ( tipAmount, index ) => <TipButton tip={ +tipAmount } key ={ index } /> )
                     }
                 </div>
             </div>
