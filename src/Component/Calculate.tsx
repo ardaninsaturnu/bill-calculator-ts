@@ -1,12 +1,13 @@
 import CalculateInput from "./CalculateInput";
 import TipButton from "./TipButton";
-import {useContext, useEffect, useState} from "react";
-import {TipContext} from "../context";
+import { useContext, useEffect, useState } from "react";
+import { TipContext } from "../context";
 
-const values = [5,10,15,25,50, 'Custom'];
+const values = [ 5,10,15,25,50, 'Custom' ];
 
 const Calculate = () => {
     const [ totalTip, setTipTotal ] = useState(0 );
+    const [ tip, setTip ] = useState(0);
     const tipContext = useContext( TipContext );
 
     useEffect(() => {
@@ -16,11 +17,11 @@ const Calculate = () => {
             tipContext.setPerPerson( 0 );
             return
         }
-        calculateTip( tipContext.tip, tipContext.peopleCount, tipContext.bill );
+        calculateTip( tip, tipContext.peopleCount, tipContext.bill );
         calculateBill( tipContext.totalTip, tipContext.bill );
         calculatePerPerson( tipContext.result, tipContext.peopleCount );
 
-    },[ tipContext.tip, tipContext.bill, tipContext.peopleCount, tipContext.totalTip, tipContext.result ]);
+    },[ tip, tipContext.bill, tipContext.peopleCount, tipContext.totalTip, tipContext.result ]);
 
     const calculateTip = ( tip: number, peopleCount: number, bill: number ) => {
 
@@ -37,7 +38,7 @@ const Calculate = () => {
 
     const calculateBill = ( totalTip: number, bill: number ) => {
         if( bill ) {
-        tipContext.setResult( totalTip + ( bill  * tipContext.peopleCount ));
+            tipContext.setResult( totalTip + ( bill  * tipContext.peopleCount ));
         } else {
             tipContext.setResult( 0 );
         }
@@ -51,12 +52,12 @@ const Calculate = () => {
 
     return(
         <div className="flex flex-col bg-white w-1/2 p-5">
-            <CalculateInput value={ tipContext.bill } setValue={ tipContext.setBill } name="bill" label="bill"/>
+            <CalculateInput value={ tipContext.bill } setValue={ tipContext.setBill } name="bill" label="bill" />
             <div>
                 <p className="mb-5">Select Tip %</p>
                 <div className="flex flex-wrap gap-2 mb-5">
                     {
-                        values.map( ( tip, index ) => <TipButton tip={ tip } key ={ index } /> )
+                        values.map( ( tipAmount, index ) => <TipButton tip={ tipAmount } setTip={setTip} key ={ index } /> )
                     }
                 </div>
             </div>

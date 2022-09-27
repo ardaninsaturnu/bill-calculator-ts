@@ -19,7 +19,7 @@ function App() {
     }
 
   return (
-      <TipContext.Provider value={{ result, totalTip, perPerson, setPerPerson, setResult, setTotalTip, tip, setTip, peopleCount, setPeopleCount, bill, setBill }}>
+      <TipContext.Provider value={{ result, setResult, totalTip, setTotalTip, perPerson, setPerPerson,  tip, setTip, peopleCount, setPeopleCount, bill, setBill }}>
           <div className="bg-cyan-100 h-screen flex flex-col justify-center items-center">
               <h2 className="text-2xl text-gray-600">SPLITTER</h2>
               <div className="p-5 flex w-3/4 mx-auto bg-white rounded-xl">
