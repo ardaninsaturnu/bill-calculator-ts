@@ -20,6 +20,8 @@ const Calculate = () => {
         calculateBill( tipContext.totalTip, tipContext.bill );
         calculatePerPerson( tipContext.result, tipContext.peopleCount );
 
+        console.log( tipContext.tip )
+
     },[ tipContext.tip, tipContext.bill, tipContext.peopleCount, tipContext.totalTip, tipContext.result ]);
 
     const calculateTip = ( tip: number, peopleCount: number, bill: number ) => {

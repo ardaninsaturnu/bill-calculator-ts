@@ -8,6 +8,7 @@ type Props = {
 
 const Result = ({ resetAll } : Props ) => {
     const tipContext = useContext( TipContext );
+
     return(
         <div className="bg-teal-900 w-1/2 p-10 rounded-2xl flex flex-col justify-between">
             <div>
