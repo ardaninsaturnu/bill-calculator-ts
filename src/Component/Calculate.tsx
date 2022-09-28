@@ -6,8 +6,7 @@ import { TipContext } from "../context";
 const values = [ 5,10,15,25,50, 'Custom' ];
 
 const Calculate = () => {
-    const [ totalTip, setTipTotal ] = useState(0 );
-    const [ tip, setTip ] = useState(0);
+    const [ totalTip, setTipTotal ] = useState( 0 );
     const tipContext = useContext( TipContext );
 
     useEffect(() => {
@@ -57,7 +56,7 @@ const Calculate = () => {
                 <p className="mb-5">Select Tip %</p>
                 <div className="flex flex-wrap gap-2 mb-5">
                     {
-                        values.map( ( tipAmount, index ) => <TipButton tip={ +tipAmount } key ={ index } /> )
+                        values.map( ( tipAmount, index ) => <TipButton tip={ tipAmount } key ={ index } /> )
                     }
                 </div>
             </div>
