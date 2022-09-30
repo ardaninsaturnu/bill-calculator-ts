@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { TipContext } from "../context";
 
 type Props = {
@@ -6,8 +6,7 @@ type Props = {
 }
 
 const TipButton = ( { tip }: Props ) => {
-    const tipContext = useContext(TipContext);
-    const [ tipValue, setTipValue ] = useState<number>( 0 );
+    const tipContext = useContext( TipContext );
 
     return (
         <>
